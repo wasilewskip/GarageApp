@@ -22,4 +22,14 @@ class Admin extends User
             $builder->where('is_admin', '=', true);
         });
     }
+
+    public function getAllUsers()
+    {
+        $users = User::all();
+        $admins = $this->all();
+
+        $mergedUsers = $users->merge($admins);
+
+        return $mergedUsers;
+    }
 }
