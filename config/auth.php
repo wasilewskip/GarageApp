@@ -71,6 +71,11 @@ return [
             'model' => App\Authentication\User::class,
         ],
 
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Authentication\Admin::class,
+        ],
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
