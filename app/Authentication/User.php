@@ -2,6 +2,8 @@
 
 namespace App\Authentication;
 
+use App\Repair;
+use App\Vehicle;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -50,5 +52,15 @@ class User extends Authenticatable
         static::addGlobalScope('is_admin', function (Builder $builder) {
             $builder->where('is_admin', '=', false);
         });
+    }
+
+    public function vehicles()
+    {
+        return $this->hasMany(Vehicle::class);
+    }
+
+    public function repairs()
+    {
+        return $this->hasMany(Repair::class);
     }
 }
