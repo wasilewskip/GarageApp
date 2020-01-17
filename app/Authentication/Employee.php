@@ -5,11 +5,11 @@ namespace App\Authentication;
 use App\Authentication\User;
 use Illuminate\Database\Eloquent\Builder;
 
-class Admin extends User
+class Employee extends User
 {
     protected $table = 'users';
 
-    const ADMIN = 'admin';
+    const EMPLOYEE = 'employee';
     
     /**
      * The "booting" method of the model.
@@ -20,9 +20,9 @@ class Admin extends User
     {
         parent::boot();
 
-        static::addGlobalScope('is_admin', function (Builder $builder) {
+        static::addGlobalScope('is_employee', function (Builder $builder) {
             $builder->whereHas('role', function (Builder $query){
-                $query->where('role', 'like', self::ADMIN);
+                $query->where('role', 'like', self::EMPLOYEE);
             });
         });
     }

@@ -3,6 +3,7 @@
 namespace App\Authentication;
 
 use App\Repair;
+use App\Role;
 use App\Vehicle;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -40,20 +41,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-        /**
-     * The "booting" method of the model.
-     *
-     * @return void
-     */
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::addGlobalScope('is_admin', function (Builder $builder) {
-            $builder->where('is_admin', '=', false);
-        });
-    }
-
     public function vehicles()
     {
         return $this->hasMany(Vehicle::class);
@@ -62,5 +49,10 @@ class User extends Authenticatable
     public function repairs()
     {
         return $this->hasMany(Repair::class);
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
     }
 }
